@@ -59,7 +59,7 @@ public class ChartDetailActivity extends AppCompatActivity {
           /* Load the Chart cover art asynchronously, process the image on the fly and apply to the View holder */
         Picasso.with(this)
                 .load(currentChart.getImages().getDefault())
-                .resize(256, 256)
+                .resize(256, 256) // TODO: place holder hack to set size
                 .centerCrop()
                 .noPlaceholder()
                 .noFade()
