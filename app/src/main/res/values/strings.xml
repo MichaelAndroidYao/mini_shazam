@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Mini Shazam</string>
+    <string name="activity_charts_name"> </string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="recycler_item_track_name">Title</string>
+    <string name="recycler_track_item_artist_name">Artist Name</string>
+    <string name="activity_chart_detail_title">Title</string>
+    <string name="activity_chart_detail_name">Artist Name</string>
+    <string name="activity_chart_detail_track_cover_content_description">Album Art</string>
+    <string name="recycler_track_item_content_description">Cover art</string>
+</resources>
