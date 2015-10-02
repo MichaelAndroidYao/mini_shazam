@@ -158,7 +158,7 @@ public class MainActivity extends EventBaseActivity {
     }
 
 
-    // TODO - handle no internet connection errors when loading data
+    // TODO - handle no internet connection errors when loading data (what happens when there is no internet connectivity)
 // REF: http://stackoverflow.com/questions/20786593/how-should-i-handle-no-internet-connection-with-retrofit-on-android
 
     /* Upon successfully downloading the Shazam charts the UI should be updated */
