@@ -185,7 +185,7 @@ public class ChartListFragment extends Fragment {
             // Retrieve the saved chart list
             List<Chart> restoredCharts = savedInstanceState.getParcelableArrayList(sCHART_TRACKS);
 
-            LOG_TAG.info("Restored: {}, chart items", restoredCharts.size());
+//            LOG_TAG.info("Restored: {}, chart items", restoredCharts.size());
 
             mTrackRecyclerAdapter.addItemsToList(restoredCharts);
 
