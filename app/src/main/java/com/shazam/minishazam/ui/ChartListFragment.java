@@ -78,7 +78,15 @@ public class ChartListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.mCurrentActivity = (MainActivity) context;
+
+        /* This makes sure that the container activity is MainActivity
+        If not, it throws an exception */
+        try {
+            this.mCurrentActivity = (MainActivity) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(mCurrentActivity.toString()
+                    + " must extend MainActivity");
+        }
     }
 
     @Override
