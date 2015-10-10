@@ -15,17 +15,10 @@
  */
 package com.shazam.minishazam.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
+import android.widget.Toast;
 
-import com.google.common.collect.Lists;
 import com.shazam.minishazam.ChartManager;
 import com.shazam.minishazam.R;
 import com.shazam.minishazam.event.ChartsDownloadedEvent;
@@ -46,7 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Displays the list of tracks in this months Charts * <p/>
+ * Displays the chart list
  *
  * @author Michael Akakpo
  */
@@ -60,18 +53,10 @@ public class MainActivity extends EventBaseActivity {
     @Inject
     ChartManager mChartManager;
 
-    @InjectView(R.id.recycler_view_list)
-    RecyclerView mRecyclerView;
+    private ChartListFragment mChartListFragment;
 
     @InjectView(R.id.activity_view_music_toolbar)
     Toolbar mViewMusicToolbar;
-
-    private TrackRecyclerAdapter mTrackRecyclerAdapter;
-
-    // Key for Serialising the Charts in the ChartManager
-    private static final String sCHART_TRACKS = "chart_tracks";
-    // Key for Serialising individual chart items in the ChartManager
-    private static final String sCURRENT_TRACK = "current_track";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,80 +68,55 @@ public class MainActivity extends EventBaseActivity {
         // Set up the App bar
         setSupportActionBar(mViewMusicToolbar);
 
-        // Initialise adapter with initial empty chart manager
-        mTrackRecyclerAdapter = new TrackRecyclerAdapter(this, mChartManager.getCharts());
-        // Set Adapter on the RecyclerView
-        mRecyclerView.setAdapter(mTrackRecyclerAdapter);
-        // Display the chart items as a list
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Allow the RecyclerView items to intercept touch events
-        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, mRecyclerView, new ClickListener() {
-            /** Handles user's click */
-            @Override
-            public void onClick(View view, int position) {
-                // Handle the click on the chart item
-                viewChartItemDetail(position);
+        // Check if the fragment has been added previously
+        if (savedInstanceState == null) {
+            if (mChartListFragment == null) {
+                // Activity starting first time
+                mChartListFragment = ChartListFragment.newInstance();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container, mChartListFragment, "chart_list_fragment")
+                        .commit();
+            } else {
+                LOG_TAG.info("Fragment retained");
+                mChartListFragment = (ChartListFragment) getSupportFragmentManager()
+                        .findFragmentByTag("chart_list_fragment");
             }
-
-            /** Handles user's long press */
-            @Override
-            public void onLongClick(View view, int position) {
-                // handle the long press on a chart item e.g. to display a context menu
-            }
-        }));
-        /* Saving the results from the fetch so we can minimise battery drain.
-         * If we have instance state saved then load chart data into the adapter
-         * and save us from making another call to the service, otherwise hit our
-         * endpoint and retrieve the charts from the server
-         */
-        if (savedInstanceState != null) {
-            LOG_TAG.info("Loading Instance state: Not the first time loading charts");
-            // Retrieve the saved chart list
-            List<Chart> restoredCharts = savedInstanceState.getParcelableArrayList(sCHART_TRACKS);
-
-            //   LOG_TAG.info("Restored: {}, chart items", restoredCharts.size());
-
-            updateChart(restoredCharts);
-        } else {
-
-            //   LOG_TAG.info("First time downloading charts...");
-            LOG_TAG.info("Chart Manager size before download: {}", mChartManager.getCharts().size());
-            mShazamServiceManager.getCharts();
         }
     }
 
-    /* Saving the charts to reduce the need to fetch them
-         * from the server each time the configuration changes */
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        LOG_TAG.info("onSaveInstanceState");
-        if (mChartManager != null) {
-            LOG_TAG.info("Serialising charts....");
-            List<Chart> savedCharts = mTrackRecyclerAdapter.getCharts();
-            LOG_TAG.info("Saving {} chart items...", savedCharts.size());
+    protected void onRestart() {
+        super.onRestart();
+        LOG_TAG.info("onRestart()");
+    }
 
-            outState.putParcelableArrayList(sCHART_TRACKS, Lists.newArrayList(savedCharts));
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LOG_TAG.info("onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LOG_TAG.info("onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LOG_TAG.info("onPause()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LOG_TAG.info("onDestroy()");
+        if (mChartListFragment != null) {
+            // Remove reference to fragment upon activity being destroyed
+            mChartListFragment = null;
         }
-        super.onSaveInstanceState(outState);
     }
-
-    /* Response for single click on chart items in the RecyclerView */
-    private void viewChartItemDetail(int position) {
-        //   LOG_TAG.debug("View item detail at: {}",  position);
-
-        Chart chartItem = mTrackRecyclerAdapter.getCharts().get(position);
-
-        Intent viewDetailIntent = new Intent(this, ChartDetailActivity.class);
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(sCURRENT_TRACK, chartItem);
-
-        viewDetailIntent.putExtras(bundle);
-
-        startActivity(viewDetailIntent);
-    }
-
 
     // TODO - handle no internet connection errors when loading data
 // REF: http://stackoverflow.com/questions/20786593/how-should-i-handle-no-internet-connection-with-retrofit-on-android
@@ -164,20 +124,27 @@ public class MainActivity extends EventBaseActivity {
     /* Upon successfully downloading the Shazam charts the UI should be updated */
     public void onEvent(ChartsDownloadedEvent event) {
         LOG_TAG.info("Chart downloaded successfully...");
-        // The Chart download was a success, so now update the UI
-        updateChart(mChartManager.getCharts());
+        // The Chart download was a success, so now update the UI with the charts in the manager
+        if (mChartManager != null) {
+            updateChart(mChartManager.getCharts());
+        }
+//        Toast.makeText(this, "charts downloaded successfully: " + mChartManager.getCharts().size(), Toast.LENGTH_LONG).show();
     }
 
     /* In the event the download failed the error should be logged and handled */
     public void onEvent(ChartsDownloadedFailedEvent event) {
         // The Chart download failed, log the error
+        Toast.makeText(this, "charts download failed: ", Toast.LENGTH_LONG).show();
         LOG_TAG.error("Retrofit Error on Callback: {}", event.getResponseError());
     }
 
     /* Update the list of chart items in the adapter */
     private void updateChart(List<Chart> charts) {
-
-        mTrackRecyclerAdapter.addItemsToList(charts);
+        if (mChartListFragment != null) {
+            if (mChartListFragment.mTrackRecyclerAdapter != null) {
+                mChartListFragment.mTrackRecyclerAdapter.addItemsToList(charts);
+            }
+        }
 
     }
 
@@ -189,81 +156,5 @@ public class MainActivity extends EventBaseActivity {
     @Override
     public void onEvent(HideDialogEvent event) {
         super.onEvent(event);
-    }
-
-    /**
-     * {@link GestureDetector} TouchListener for intercepting touch events on the RecyclerView
-     * It allows the children in the view hierarchy to independently decide
-     * how they will intercept the events correctly.
-     */
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
-
-        // Gesture detector
-        private final GestureDetector gestureDetector;
-        private final ClickListener mClickListener;
-
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
-            this.mClickListener = clickListener;
-
-            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-                /**
-                 * @inheritDoc
-                 */
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    return true;
-                }
-
-                /**
-                 * @inheritDoc
-                 */
-                @Override
-                public void onLongPress(MotionEvent e) {
-                    // Get the X and Y coordinates of the child view that was clicked
-                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
-                    if (child != null && mClickListener != null) {
-                        mClickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
-                    }
-                }
-            });
-        }
-
-        /**
-         * @inheritDoc
-         */
-        @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            View child = rv.findChildViewUnder(e.getX(), e.getY());
-
-            if (child != null && mClickListener != null && gestureDetector.onTouchEvent(e)) {
-                mClickListener.onClick(child, rv.getChildAdapterPosition(child));
-            }
-
-            return false;
-        }
-
-        /**
-         * @inheritDoc
-         */
-        @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-        }
-
-        /**
-         * @inheritDoc
-         */
-        @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-        }
-    }
-
-    /**
-     * The click and long press listener for when items in the chart are selected
-     */
-    public interface ClickListener {
-
-        void onClick(View view, int position);
-
-        void onLongClick(View view, int position);
     }
 }

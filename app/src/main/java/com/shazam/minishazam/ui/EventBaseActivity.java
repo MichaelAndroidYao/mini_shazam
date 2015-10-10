@@ -46,10 +46,12 @@ public class EventBaseActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
+    // Show the loading dialog while fetching data
     void onEvent(ShowDialogEvent event) {
-        mLoading = ProgressDialog.show(this, "Loading", "loading...", true);
+        mLoading = ProgressDialog.show(this, "", "", true);
     }
 
+    // Hide the loading dialog
     void onEvent(HideDialogEvent event) {
         if (mLoading == null) {
             return;

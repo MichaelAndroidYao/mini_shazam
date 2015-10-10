@@ -45,9 +45,10 @@ public class ShazamServiceManager {
     private final ChartManager mChartManager;
     private List<Chart> listOfReturnedChartsFromResponse;
 
+    // Initialise the Manager and retrofit service
     public ShazamServiceManager(ShazamService shazamService, ChartManager chartManager) {
-        mShazamService = shazamService;
-        mChartManager = chartManager;
+        this.mShazamService = shazamService;
+        this.mChartManager = chartManager;
     }
 
     /**
@@ -61,7 +62,6 @@ public class ShazamServiceManager {
         mShazamService.getCharts(new Callback<GetRecentChartsResponse>() {
             @Override
             public void success(GetRecentChartsResponse thisMonthsChartsResponse, Response response) {
-                EventBus.getDefault().post(new HideDialogEvent());
                 // Update the singleton Chart Manager
                 listOfReturnedChartsFromResponse = thisMonthsChartsResponse.getChartsResponse();
                 mChartManager.setCharts(listOfReturnedChartsFromResponse);
@@ -69,6 +69,7 @@ public class ShazamServiceManager {
                 // LOG_TAG.info("Chart Manager now has {}: after response", mChartManager.getCharts().toString());
 
                 // Notify the UI thread
+                EventBus.getDefault().post(new HideDialogEvent());
                 EventBus.getDefault().post(new ChartsDownloadedEvent(thisMonthsChartsResponse));
             }
 

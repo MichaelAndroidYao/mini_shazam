@@ -5,6 +5,7 @@
     <!-- Allows the music player to perform network operations -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
     <application

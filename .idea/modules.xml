@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/shazamapidemo.iml" filepath="$PROJECT_DIR$/shazamapidemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mini_shazam.iml" filepath="$PROJECT_DIR$/mini_shazam.iml" />
     </modules>
   </component>
 </project>

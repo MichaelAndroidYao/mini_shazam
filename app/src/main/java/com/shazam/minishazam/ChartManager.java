@@ -34,6 +34,10 @@ public class ChartManager implements Parcelable {
 
     private List<Chart> mCharts = new ArrayList<>();
 
+    public ChartManager() {
+        // no args empty contructor
+    }
+
     // Packaging up the parcel: only interested in certain fields
     public ChartManager(Parcel input) {
         mCharts = input.readArrayList(Chart.class.getClassLoader());
