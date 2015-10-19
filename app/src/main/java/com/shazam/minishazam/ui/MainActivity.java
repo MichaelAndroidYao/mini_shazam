@@ -15,6 +15,7 @@
  */
 package com.shazam.minishazam.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.shazam.minishazam.R;
 import com.shazam.minishazam.event.ChartsDownloadedEvent;
 import com.shazam.minishazam.event.ChartsDownloadedFailedEvent;
 import com.shazam.minishazam.event.HideDialogEvent;
+import com.shazam.minishazam.event.LoadDataEvent;
 import com.shazam.minishazam.event.ShowDialogEvent;
 import com.shazam.minishazam.model.Chart;
 import com.shazam.minishazam.service.ShazamServiceManager;
@@ -46,6 +48,8 @@ import butterknife.InjectView;
 public class MainActivity extends EventBaseActivity {
 
     private static final Logger LOG_TAG = LoggerFactory.getLogger(MainActivity.class);
+
+    private ProgressDialog mLoading;
 
     @Inject
     ShazamServiceManager mShazamServiceManager;
@@ -122,7 +126,7 @@ public class MainActivity extends EventBaseActivity {
 // REF: http://stackoverflow.com/questions/20786593/how-should-i-handle-no-internet-connection-with-retrofit-on-android
 
     /* Upon successfully downloading the Shazam charts the UI should be updated */
-    public void onEvent(ChartsDownloadedEvent event) {
+    void onEvent(ChartsDownloadedEvent event) {
         LOG_TAG.info("Chart downloaded successfully...");
         // The Chart download was a success, so now update the UI with the charts in the manager
         if (mChartManager != null) {
@@ -132,10 +136,16 @@ public class MainActivity extends EventBaseActivity {
     }
 
     /* In the event the download failed the error should be logged and handled */
-    public void onEvent(ChartsDownloadedFailedEvent event) {
+    void onEvent(ChartsDownloadedFailedEvent event) {
         // The Chart download failed, log the error
         Toast.makeText(this, "charts download failed: ", Toast.LENGTH_LONG).show();
         LOG_TAG.error("Retrofit Error on Callback: {}", event.getResponseError());
+    }
+
+    void onEvent(LoadDataEvent event) {
+        super.onEvent(event);
+        Toast.makeText(this, "lading that event ", Toast.LENGTH_LONG).show();
+
     }
 
     /* Update the list of chart items in the adapter */
@@ -151,6 +161,8 @@ public class MainActivity extends EventBaseActivity {
     @Override
     public void onEvent(ShowDialogEvent event) {
         super.onEvent(event);
+        // mLoading = ProgressDialog.show(this, "", "", true);
+
     }
 
     @Override

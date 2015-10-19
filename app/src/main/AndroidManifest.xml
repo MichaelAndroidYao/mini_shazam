@@ -5,7 +5,7 @@
     <!-- Allows the music player to perform network operations -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
     <application
@@ -27,6 +27,15 @@
         <activity
             android:name=".ui.ChartDetailActivity"
             android:label="Chart Detail" />
+
+        <receiver
+            android:name=".network.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ package com.shazam.minishazam.ui;
 import android.app.ProgressDialog;
 
 import com.shazam.minishazam.event.HideDialogEvent;
+import com.shazam.minishazam.event.LoadDataEvent;
 import com.shazam.minishazam.event.ShowDialogEvent;
 
 import de.greenrobot.event.EventBus;
@@ -58,5 +59,8 @@ public class EventBaseActivity extends BaseActivity {
         }
         mLoading.dismiss();
         mLoading = null;
+    }
+
+    void onEvent(LoadDataEvent event) {
     }
 }

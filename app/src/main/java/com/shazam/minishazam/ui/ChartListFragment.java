@@ -295,4 +295,6 @@ public class ChartListFragment extends Fragment {
 
         startActivity(viewDetailIntent);
     }
+
+
 }
