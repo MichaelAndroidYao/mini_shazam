@@ -285,8 +285,13 @@ public class ChartListFragment extends Fragment {
         // Extract the Chart item at position clicked
         Chart chartItem = mTrackRecyclerAdapter.getCharts().get(position);
 
+        LOG_TAG.info("selectedChart ", "chart item" + chartItem.getImages().getDefault());
+        LOG_TAG.info("selectedChart ", "chart item" + chartItem.getImages().getDefault());
+        LOG_TAG.info("selectedChart ", "chart item" + chartItem.getImages().getDefault());
+
         // Store the item in a bundle and send to {@link ChartDetailActivity} for viewing
-        Intent viewDetailIntent = new Intent(getActivity(), ChartDetailActivity.class);
+//        Intent viewDetailIntent = new Intent(getActivity(), ChartDetailActivity.class);
+        Intent viewDetailIntent = new Intent(getActivity(), NowPlayingActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(sCURRENT_TRACK, chartItem);

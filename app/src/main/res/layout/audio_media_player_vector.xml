@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/primaryAccentColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@color/primaryColorBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        android:padding="8dp">
+
+        <!--android:background="@color/primaryColorDarkest"-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:padding="8dp"
+
+            android:src="@drawable/ic_repeat_white_48px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:padding="8dp"
+
+            android:src="@drawable/ic_fast_rewind_white_48px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:padding="8dp"
+
+            android:src="@drawable/ic_play_arrow_white_48px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:padding="8dp"
+
+            android:src="@drawable/ic_fast_forward_white_48px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:padding="8dp"
+            android:src="@drawable/ic_shuffle_white_48px" />
+    </LinearLayout>
+
+</LinearLayout>

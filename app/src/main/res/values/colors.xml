@@ -5,4 +5,25 @@
     <color name="colorHighlight">#B6B6B6</color>
     <color name="primaryColor">#2196F3</color>
     <color name="primaryColorDark">#B6B6B6</color>
+
+    <color name="primaryLight">#F5F5F5</color>
+    <!--<color name="primaryColor">#9E9E9E</color>-->
+    <!--<color name="primaryColorDark">#616161</color>-->
+
+    <color name="recyclerViewlineDivider">#525252</color>
+    <color name="primaryColorDarker">#424242</color>
+    <color name="primaryColorBackground">#303030</color>
+    <color name="primaryColorDarkest">#212121</color>
+
+    <color name="primaryAccentLight">#FF80AB</color>
+    <color name="primaryAccentColor">#FF4081</color>
+
+    <!--<color name="accentColor">#E91E63</color>-->
+    <color name="primaryAccentDark">#F50057</color>
+
+    <!-- TODO: Should be amended to conform to material design spec colors -->
+    <color name="main">#63C3FF</color>
+    <color name="actionbar_title_color">@android:color/white</color>
+    <!--Ripple color-->
+    <!--<color name="colorHighlight">#B6B6B6</color>-->
 </resources>

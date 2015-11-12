@@ -27,6 +27,9 @@
         <activity
             android:name=".ui.ChartDetailActivity"
             android:label="Chart Detail" />
+        <activity
+            android:name=".ui.NowPlayingActivity"
+            android:label="Now Playing" />
 
         <receiver
             android:name=".network.NetworkChangeReceiver"

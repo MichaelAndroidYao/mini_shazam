@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.piffmedia.piffmusicplayer.activities.NowPlayingActivity">
+
+    <include
+        android:id="@+id/activity_view_music_toolbar"
+        layout="@layout/activity_generic_toolbar" />
+
+    <FrameLayout
+        android:id="@+id/fl_now_playing_album_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+    </FrameLayout>
+
+    <FrameLayout
+    android:id="@+id/fl_now_playing_album_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3">
+
+    </FrameLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/fl_now_playing_media_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/primaryColorDarkest"
+        android:gravity="bottom">
+
+    </RelativeLayout>
+</LinearLayout>

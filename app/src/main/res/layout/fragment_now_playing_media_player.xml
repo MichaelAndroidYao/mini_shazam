@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/now_playing_time"
+        layout="@layout/fragment_now_playing_time" />
+
+    <include
+        android:id="@+id/app_media_bar"
+        layout="@layout/audio_media_player_vector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
