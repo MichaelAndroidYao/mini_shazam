@@ -48,5 +48,4 @@ public class NowPlayingActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fl_now_playing_media_player, mNowPlayingMediaPlayerFragment);
         fragmentTransaction.commit();
     }
-
 }

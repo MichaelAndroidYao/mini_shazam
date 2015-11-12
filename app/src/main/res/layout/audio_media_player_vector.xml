@@ -7,7 +7,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:background="@color/primaryAccentColor" />
+        android:background="@color/primaryColor" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,17 +16,14 @@
         android:background="@color/primaryColorBackground"
         android:gravity="center"
         android:orientation="horizontal"
-
         android:padding="8dp">
 
-        <!--android:background="@color/primaryColorDarkest"-->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="5"
             android:padding="8dp"
-
             android:src="@drawable/ic_repeat_white_48px" />
 
         <ImageView
@@ -35,7 +32,6 @@
             android:layout_gravity="center"
             android:layout_weight="5"
             android:padding="8dp"
-
             android:src="@drawable/ic_fast_rewind_white_48px" />
 
         <ImageView
@@ -44,7 +40,6 @@
             android:layout_gravity="center"
             android:layout_weight="5"
             android:padding="8dp"
-
             android:src="@drawable/ic_play_arrow_white_48px" />
 
         <ImageView
@@ -53,7 +48,6 @@
             android:layout_gravity="center"
             android:layout_weight="5"
             android:padding="8dp"
-
             android:src="@drawable/ic_fast_forward_white_48px" />
 
         <ImageView
