@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_now_playing_album_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/recyclerViewlineDivider"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.piffmedia.piffmusicplayer.fragments.NowPlayingAlbumDetailsFragment">
+
+    <TextView
+        android:id="@+id/txt_now_playing_track_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="Track title, loreum epsum, loreum epsum, feat (artist) "
+        android:textSize="18sp"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/txt_now_playing_album_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Artist name"
+        android:textSize="16sp" />
+
+</LinearLayout>

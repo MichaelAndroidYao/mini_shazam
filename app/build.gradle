@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.0"
+
+    defaultConfig {
+        applicationId "com.shazam.minishazam"
+        minSdkVersion 21
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    /* AppCompat Support libraries for backwards support across older API versions  */
+    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:support-v4:23.0.0'
+    // Dependency Injection libraries
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.squareup.dagger:dagger:1.2.1'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.1'
+    /* Annotations */
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    // EventBus
+    compile 'de.greenrobot:eventbus:2.2.1'
+    // Retrofit - Simplifying API calls for cleaner code
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    // JSON Serialization and Deserialization
+    compile 'com.google.code.gson:gson:2.3.0'
+    // Okhttp efficient http client
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    /* Recycler View */
+    compile 'com.android.support:recyclerview-v7:23.0.0'
+    /* Loading images into for track items on the charts */
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    /* Logging */
+    compile 'org.slf4j:slf4j-android:1.7.12'
+    // Utilities
+    compile 'com.google.guava:guava:19.0-rc1'
+
+    // App's dependencies, including test
+    compile 'com.android.support:support-annotations:23.0.0'
+
+    /* UI testing framework - exclude javax.inject to stop interfering with
+         builds if using Dagger for dependency injection */
+    // Espresso dependencies
+    androidTestCompile 'com.android.support.test:runner:0.3'
+    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+
+    // Add this for intent mocking support
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
+    // add this for webview testing support
+    androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2'
+
+    // RecyclerView support for ui test
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+    // Use Retrofit Mock for proper mocking of services
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.squareup.retrofit:retrofit-mock:1.9.0'
+    androidTestCompile('com.squareup.assertj:assertj-android:1.0.0') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+}
