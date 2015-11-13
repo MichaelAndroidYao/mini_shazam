@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.common.collect.Lists;
 import com.shazam.minishazam.ChartManager;
 import com.shazam.minishazam.R;
 import com.shazam.minishazam.model.Chart;
@@ -180,20 +179,22 @@ public class ChartListFragment extends Fragment {
         super.onViewStateRestored(savedInstanceState);
         LOG_TAG.info("onViewStateRestored");
 
-        if (savedInstanceState != null) {
-            LOG_TAG.info("reload from the bundle ");
-            // Retrieve the saved chart list
-            List<Chart> restoredCharts = savedInstanceState.getParcelableArrayList(sCHART_TRACKS);
+//        if (savedInstanceState != null) {
+//            LOG_TAG.info("reload from the bundle ");
+//            // Retrieve the saved chart list
+//            List<Chart> restoredCharts = savedInstanceState.getParcelableArrayList(sCHART_TRACKS);
+//
+////            LOG_TAG.info("Restored: {}, chart items", restoredCharts.size());
+//
+//            mTrackRecyclerAdapter.addItemsToList(restoredCharts);
+//
+//        } else {
+//            LOG_TAG.info("Chart Manager size before download: {}", mChartManager.getCharts().size());
+//            // Load the content
+//            loadData();
+//        }
 
-//            LOG_TAG.info("Restored: {}, chart items", restoredCharts.size());
-
-            mTrackRecyclerAdapter.addItemsToList(restoredCharts);
-
-        } else {
-            LOG_TAG.info("Chart Manager size before download: {}", mChartManager.getCharts().size());
-            // Load the content
-            loadData();
-        }
+          loadData();
     }
 
     @Override
@@ -218,14 +219,14 @@ public class ChartListFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         LOG_TAG.info("onSaveInstanceState");
-        if (mChartManager != null) {
-            LOG_TAG.info("Serialising charts....");
-            List<Chart> savedCharts = mTrackRecyclerAdapter.getCharts();
-            LOG_TAG.info("Saving {} chart items...", savedCharts.size());
-
-            outState.putParcelableArrayList(sCHART_TRACKS, Lists.newArrayList(savedCharts));
-        }
-        super.onSaveInstanceState(outState);
+//        if (mChartManager != null) {
+//            LOG_TAG.info("Serialising charts....");
+//            List<Chart> savedCharts = mTrackRecyclerAdapter.getCharts();
+//            LOG_TAG.info("Saving {} chart items...", savedCharts.size());
+//
+//            outState.putParcelableArrayList(sCHART_TRACKS, Lists.newArrayList(savedCharts));
+//        }
+//        super.onSaveInstanceState(outState);
 
     }
 
@@ -269,7 +270,6 @@ public class ChartListFragment extends Fragment {
             Toast.makeText(getActivity(), "Fetching data", Toast.LENGTH_SHORT).show();
         } else {
             // let user know the connection is not available
-
 
             Toast.makeText(getActivity(), "No internet connection", Toast.LENGTH_LONG).show();
             LOG_TAG.info("No network connection available");

@@ -19,6 +19,7 @@
         android:padding="8dp">
 
         <ImageView
+            android:id="@+id/img_now_playing_repeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,6 +28,7 @@
             android:src="@drawable/ic_repeat_white_48px" />
 
         <ImageView
+            android:id="@+id/img_now_playing_fast_rewind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -35,6 +37,7 @@
             android:src="@drawable/ic_fast_rewind_white_48px" />
 
         <ImageView
+            android:id="@+id/img_now_playing_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -43,6 +46,7 @@
             android:src="@drawable/ic_play_arrow_white_48px" />
 
         <ImageView
+            android:id="@+id/img_now_playing_fast_forward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -51,6 +55,7 @@
             android:src="@drawable/ic_fast_forward_white_48px" />
 
         <ImageView
+            android:id="@+id/img_now_playing_shuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

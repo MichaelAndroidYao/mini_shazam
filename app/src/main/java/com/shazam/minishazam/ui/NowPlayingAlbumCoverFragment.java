@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.shazam.minishazam.R;
 import com.shazam.minishazam.model.Chart;
@@ -71,6 +72,13 @@ public class NowPlayingAlbumCoverFragment extends Fragment {
                 .noPlaceholder()
                 .noFade()
                 .into(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Touched the album cover", Toast.LENGTH_LONG).show();
+            }
+        });
 
         return rootView;
     }
