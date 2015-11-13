@@ -57,7 +57,7 @@ public class ChartListFragment extends Fragment {
 
     TrackRecyclerAdapter mTrackRecyclerAdapter;
 
-    //    @InjectView(R.id.recycler_view_list)
+    // @InjectView(R.id.recycler_view_list)
     private RecyclerView mRecyclerView;
 
     // Key for Serialising the Charts in the ChartManager
@@ -72,7 +72,6 @@ public class ChartListFragment extends Fragment {
     public static ChartListFragment newInstance() {
         return new ChartListFragment();
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -96,7 +95,6 @@ public class ChartListFragment extends Fragment {
         // Initialise the service manager and chart manager before the view is drawn
         this.mShazamServiceManager = mCurrentActivity.mShazamServiceManager;
         this.mChartManager = mCurrentActivity.mChartManager;
-
     }
 
     @Override
@@ -104,14 +102,12 @@ public class ChartListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         LOG_TAG.info("onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_chart_list, container, false);
-        //  TextView textView = (TextView) rootView.findViewById(R.id.txt_fragment_text);
 
         // Initialise adapter with initial empty chart manager
-        // mTrackRecyclerAdapter = new TrackRecyclerAdapter(getActivity(), getData());
-        //TODO: set up ChartManager: -
         mTrackRecyclerAdapter = new TrackRecyclerAdapter(getActivity(), mChartManager.getCharts());
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_list);
+
         // Set Adapter on the RecyclerView
         mRecyclerView.setAdapter(mTrackRecyclerAdapter);
         // Display the chart items as a list
@@ -194,7 +190,7 @@ public class ChartListFragment extends Fragment {
 //            loadData();
 //        }
 
-          loadData();
+        loadData();
     }
 
     @Override
